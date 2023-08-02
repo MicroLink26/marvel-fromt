@@ -1,0 +1,29 @@
+.comics-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-around;
+
+  margin: -10px 0 0 0;
+}
+/* add a corresponding positive top margin to all flex items (all direct children of the flex container) */
+.comics-container > * {
+  margin-top: 10px;
+}
+
+.comics-container > div {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+/* .comics-container > div > img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+} */
+
+.comics-container > div > p {
+  width: 300px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}

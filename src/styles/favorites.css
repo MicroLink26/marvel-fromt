@@ -1,0 +1,33 @@
+.characters-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-around;
+  margin: -10px 0 0 0;
+}
+
+.characters-container > * {
+  margin-top: 10px;
+}
+
+.characters-container > a {
+  text-decoration: none;
+  color: black;
+}
+
+≈ .characters-container > a > div {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+/* .characters-container > a > div > img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+  } */
+
+.characters-container > a > div > p {
+  width: 300px;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
