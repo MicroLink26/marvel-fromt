@@ -9,9 +9,9 @@ import Spinner from "../components/Spinner";
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [page, setPage] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   useEffect(() => {
-    console.log(import.meta.env.VITE_API_URL);
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -37,6 +37,29 @@ const Home = () => {
 
     return favoriteIndex === -1 ? false : true;
   };
+  const handdleScroll = (event) => {
+    console.log(event);
+  };
+
+  //  import.meta.env.VITE_API_URL + "/characters?skip=" + page * 100
+  useEffect(() => {
+    if (page != 0) {
+      setIsLoadingMore(true);
+      const loadMore = async () => {
+        try {
+          const response = await axios.get(
+            import.meta.env.VITE_API_URL + "/characters?skip=" + page * 100
+          );
+          characterList.push(...response.data.results);
+          setCharacterList([...characterList]);
+          setIsLoadingMore(false);
+        } catch (error) {
+          console.log("catch home>>>", error);
+        }
+      };
+      loadMore();
+    }
+  }, [page]);
   return isLoading ? (
     <Spinner />
   ) : (
@@ -59,6 +82,22 @@ const Home = () => {
           </Link>
         );
       })}
+      {isLoadingMore ? (
+        <div className="loading-more">
+          <Spinner />
+        </div>
+      ) : (
+        <a>
+          <button
+            onClick={() => {
+              setPage(page + 1);
+            }}
+            className="loading-more"
+          >
+            Charger plus
+          </button>
+        </a>
+      )}
     </div>
   );
 };

@@ -8,7 +8,8 @@ import "../styles/comics.css";
 const Comics = () => {
   const [comicsList, setComicsList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [page, setPage] = useState(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   useEffect(() => {
     console.log(import.meta.env.VITE_API_URL);
     const fetchData = async () => {
@@ -37,6 +38,24 @@ const Comics = () => {
     return favoriteIndex === -1 ? false : true;
   };
 
+  useEffect(() => {
+    if (page != 0) {
+      setIsLoadingMore(true);
+      const loadMore = async () => {
+        try {
+          const response = await axios.get(
+            import.meta.env.VITE_API_URL + "/comics?skip=" + page * 100
+          );
+          comicsList.push(...response.data.results);
+          setComicsList([...comicsList]);
+          setIsLoadingMore(false);
+        } catch (error) {
+          console.log("catch home>>>", error);
+        }
+      };
+      loadMore();
+    }
+  }, [page]);
   return isLoading ? (
     <Spinner />
   ) : (
@@ -59,6 +78,22 @@ const Comics = () => {
           </Link>
         );
       })}
+      {isLoadingMore ? (
+        <div className="loading-more">
+          <Spinner />
+        </div>
+      ) : (
+        <a>
+          <button
+            onClick={() => {
+              setPage(page + 1);
+            }}
+            className="loading-more"
+          >
+            Charger plus
+          </button>
+        </a>
+      )}
     </div>
   );
 };

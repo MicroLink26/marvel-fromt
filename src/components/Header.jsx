@@ -1,6 +1,12 @@
 import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
-const Header = () => {
+import Cookies from "js-cookie";
+const Header = ({ userToken, setUserToken }) => {
+  const handleDisconnect = () => {
+    Cookies.remove("token");
+    setUserToken("");
+    navigate("/");
+  };
   return (
     <header className="container">
       <img src={logo} />
@@ -14,7 +20,26 @@ const Header = () => {
         <li>
           <Link to="/favorites">Mes coups de c&oelig;urs</Link>
         </li>
-        <li>Mon profil</li>
+        {userToken ? (
+          <>
+            <li>
+              <a>Mon profil</a>
+            </li>
+            <li>
+              <a onClick={handleDisconnect}>Se déconnecter</a>
+            </li>
+          </>
+        ) : (
+          <>
+            <li>
+              <Link to="/login">Se connecter</Link>
+            </li>
+            <li>
+              <Link to="/signup">S'inscrire</Link>
+            </li>
+          </>
+        )}
+
         {/* <li>Login</li> */}
       </ul>
     </header>
