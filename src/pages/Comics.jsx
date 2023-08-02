@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Spinner from "../components/Spinner";
 import "../styles/comics.css";
 
@@ -25,6 +27,16 @@ const Comics = () => {
     fetchData();
   }, []);
 
+  const findInStorage = (id) => {
+    const favoritesComics =
+      JSON.parse(localStorage.getItem("favoritesComics")) || [];
+    const favoriteIndex = favoritesComics.findIndex((element) => {
+      return element === id;
+    });
+
+    return favoriteIndex === -1 ? false : true;
+  };
+
   return isLoading ? (
     <Spinner />
   ) : (
@@ -32,11 +44,19 @@ const Comics = () => {
       {comicsList.map((comic) => {
         const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
         return (
-          <div key={comic._id}>
-            <p>{comic.title}</p>
+          <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
+            <div>
+              <p>
+                <FontAwesomeIcon
+                  icon="star"
+                  className={findInStorage(comic._id) ? "favorite" : ""}
+                />
+                {comic.title}
+              </p>
 
-            <img src={imageUrl} />
-          </div>
+              <img src={imageUrl} />
+            </div>
+          </Link>
         );
       })}
     </div>

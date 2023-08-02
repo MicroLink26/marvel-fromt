@@ -10,7 +10,12 @@
   margin-top: 10px;
 }
 
-.comics-container > div {
+.comics-container > a {
+  text-decoration: none;
+  color: black;
+}
+
+.comics-container > a > div {
   width: 300px;
   display: flex;
   flex-direction: column;
@@ -21,7 +26,7 @@
   background-color: lightgrey;
 }
 
-.comics-container > div > p {
+.comics-container > a > div > p {
   width: 300px;
   font-weight: bold;
   font-size: 20px;

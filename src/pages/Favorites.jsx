@@ -8,6 +8,7 @@ import "../styles/favorites.css";
 import Spinner from "../components/Spinner";
 const Favorites = () => {
   const [characterList, setCharacterList] = useState([]);
+  const [comicList, setComicList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     console.log(import.meta.env.VITE_API_URL);
@@ -22,6 +23,19 @@ const Favorites = () => {
         );
         console.log(response.data);
         setCharacterList(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("catch home>>>", error);
+      }
+      try {
+        const response = await axios.post(
+          import.meta.env.VITE_API_URL + "/comics",
+          {
+            comics: JSON.parse(localStorage.getItem("favoritesComics")) || [],
+          }
+        );
+        console.log(response.data);
+        setComicList(response.data);
         setIsLoading(false);
       } catch (error) {
         console.log("catch home>>>", error);
@@ -50,7 +64,20 @@ const Favorites = () => {
         })}
       </div>
       <h2>Comics</h2>
-      <div></div>
+      <div className="comics-container">
+        {comicList.map((comic) => {
+          const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+          return (
+            <Link to={`/comicetail/${comic._id}`} key={comic._id}>
+              <div>
+                <p>{comic.title}</p>
+
+                <img src={imageUrl} />
+              </div>
+            </Link>
+          );
+        })}
+      </div>
     </>
   );
 };
