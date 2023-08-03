@@ -2,3 +2,11 @@
   width: 400px;
   object-fit: contain;
 }
+.characterDetail .encart {
+  display: flex;
+  gap: 10px;
+}
+.characterDetail .encart p {
+  font-size: 20px;
+  text-align: justify;
+}

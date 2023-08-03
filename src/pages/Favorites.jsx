@@ -68,7 +68,7 @@ const Favorites = () => {
         {comicList.map((comic) => {
           const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
           return (
-            <Link to={`/comicetail/${comic._id}`} key={comic._id}>
+            <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
               <div>
                 <p>{comic.title}</p>
 

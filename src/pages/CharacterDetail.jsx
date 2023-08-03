@@ -2,14 +2,16 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import "../styles/characterdetail.css";
 
 import Spinner from "../components/Spinner";
 
 const CharacterDetail = () => {
   const [character, setCharacter] = useState({});
+  const [comicsList, setComicsList] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const [isLoadingComics, setIsLoadingComics] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -21,10 +23,24 @@ const CharacterDetail = () => {
         );
 
         setCharacter(response.data);
+        console.log(response.data.comics);
         setIsLoading(false);
+        //load comics
+        try {
+          const { data } = await axios.post(
+            import.meta.env.VITE_API_URL + "/comics/",
+            { comics: response.data.comics }
+          );
+          console.log(data);
+          setComicsList(data);
+          setIsLoadingComics(false);
+        } catch (error) {
+          console.log("catch movies>>", error);
+        }
+
         //console.log(response.data);
       } catch (error) {
-        console.log("catch home>>>", error);
+        console.log("catch detail>>", error);
       }
     };
 
@@ -85,10 +101,50 @@ const CharacterDetail = () => {
         />
         {character.name}
       </h2>
-      <p>{character.description}</p>
-      <img
-        src={character.thumbnail.path + "." + character.thumbnail.extension}
-      />
+      <div className="encart">
+        <p>{character.description}</p>
+        <img
+          src={character.thumbnail.path + "." + character.thumbnail.extension}
+        />
+      </div>
+      <h2>Comics</h2>
+      <div className="comics-container">
+        {isLoadingComics ? (
+          <>
+            <a>
+              <div>
+                <p> </p>
+                <img></img>
+              </div>
+            </a>
+            <a>
+              <div>
+                <p></p>
+                <img></img>
+              </div>
+            </a>
+            <a>
+              <div>
+                <p> </p>
+                <img></img>
+              </div>
+            </a>
+          </>
+        ) : (
+          comicsList.map((comic) => {
+            const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+            return (
+              <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
+                <div>
+                  <p>{comic.title}</p>
+
+                  <img src={imageUrl} />
+                </div>
+              </Link>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };
