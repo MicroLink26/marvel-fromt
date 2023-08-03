@@ -35,7 +35,7 @@ const CharacterDetail = () => {
           setComicsList(data);
           setIsLoadingComics(false);
         } catch (error) {
-          console.log("catch movies>>", error);
+          console.log("catch comicsS>>", error);
         }
 
         //console.log(response.data);
