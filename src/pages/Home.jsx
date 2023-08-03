@@ -9,8 +9,10 @@ import Spinner from "../components/Spinner";
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [results, setRessult] = useState(0);
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [searchText, setSearchText] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -19,6 +21,7 @@ const Home = () => {
         );
         //console.log(response.data.results);
         setCharacterList(response.data.results);
+        setRessult(response.data.count);
         setIsLoading(false);
       } catch (error) {
         console.log("catch home>>>", error);
@@ -37,68 +40,98 @@ const Home = () => {
 
     return favoriteIndex === -1 ? false : true;
   };
-  const handdleScroll = (event) => {
-    console.log(event);
-  };
 
-  //  import.meta.env.VITE_API_URL + "/characters?skip=" + page * 100
   useEffect(() => {
-    if (page != 0) {
-      setIsLoadingMore(true);
-      const loadMore = async () => {
-        try {
-          const response = await axios.get(
-            import.meta.env.VITE_API_URL + "/characters?skip=" + page * 100
-          );
-          characterList.push(...response.data.results);
-          setCharacterList([...characterList]);
-          setIsLoadingMore(false);
-        } catch (error) {
-          console.log("catch home>>>", error);
-        }
-      };
-      loadMore();
-    }
-  }, [page]);
+    setIsLoadingMore(true);
+    const loadMore = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/characters?skip=${
+            page * 100
+          }&name=${searchText}`
+        );
+        setRessult(response.data.count);
+        setCharacterList(response.data.results);
+        setIsLoadingMore(false);
+      } catch (error) {
+        console.log("catch home>>>", error);
+      }
+    };
+    loadMore();
+  }, [page, searchText]);
   return isLoading ? (
     <Spinner />
   ) : (
-    <div className="characters-container">
-      {characterList.map((character) => {
-        const imageUrl = `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`;
-        return (
-          <Link to={`/characterdetail/${character._id}`} key={character._id}>
-            <div>
-              <p>
-                <FontAwesomeIcon
-                  icon="star"
-                  className={findInStorage(character._id) ? "favorite" : ""}
-                />{" "}
-                {character.name}
-              </p>
+    <>
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Recherche des personnages"
+          value={searchText}
+          onChange={(event) => {
+            setSearchText(event.target.value);
+            setPage(0);
+          }}
+        ></input>
+        <i className="fa-solid fa-search search-input-icon"></i>
+      </div>
+      <div>
+        {" "}
+        {results} personnage{results > 1 && "s"} trouvé{results > 1 && "s"}
+      </div>
+      <div className="pagination">
+        <i
+          onClick={() => {
+            setPage(page - 1);
+          }}
+          className={
+            page === 0
+              ? "hidden fa-solid fa-arrow-left"
+              : "fa-solid fa-arrow-left"
+          }
+        ></i>
+        <span>page {page + 1}</span>
+        <i
+          className={
+            page === Math.floor(results / 100)
+              ? "hidden fa-solid fa-arrow-left"
+              : "fa-solid fa-arrow-right"
+          }
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        ></i>
+      </div>
 
-              <img src={imageUrl} />
-            </div>
-          </Link>
-        );
-      })}
       {isLoadingMore ? (
-        <div className="loading-more">
-          <Spinner />
-        </div>
+        <Spinner />
       ) : (
-        <a>
-          <button
-            onClick={() => {
-              setPage(page + 1);
-            }}
-            className="loading-more"
-          >
-            Charger plus
-          </button>
-        </a>
+        <div className="characters-container">
+          {characterList.map((character) => {
+            const imageUrl = `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`;
+            return (
+              <Link
+                to={`/characterdetail/${character._id}`}
+                key={character._id}
+              >
+                <div>
+                  <p>
+                    <FontAwesomeIcon
+                      icon="star"
+                      className={findInStorage(character._id) ? "favorite" : ""}
+                    />{" "}
+                    {character.name}
+                  </p>
+
+                  <img src={imageUrl} />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
