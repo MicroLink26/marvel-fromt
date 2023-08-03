@@ -17,7 +17,7 @@ const Home = () => {
         const response = await axios.get(
           import.meta.env.VITE_API_URL + "/characters"
         );
-
+        console.log(response.data.results);
         setCharacterList(response.data.results);
         setIsLoading(false);
       } catch (error) {
