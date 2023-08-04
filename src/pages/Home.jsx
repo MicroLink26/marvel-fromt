@@ -8,28 +8,28 @@ import Spinner from "../components/Spinner";
 
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  //const [isLoading, setIsLoading] = useState(true);
   const [results, setRessult] = useState(0);
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchText, setSearchText] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          import.meta.env.VITE_API_URL + "/characters"
-        );
-        //console.log(response.data.results);
-        setCharacterList(response.data.results);
-        setRessult(response.data.count);
-        setIsLoading(false);
-      } catch (error) {
-        console.log("catch home>>>", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         import.meta.env.VITE_API_URL + "/characters"
+  //       );
+  //       //console.log(response.data.results);
+  //       setCharacterList(response.data.results);
+  //       setRessult(response.data.count);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.log("catch home>>>", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const findInStorage = (id) => {
     const favoritesCharacters =
@@ -42,12 +42,13 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (page < 0) setPage(0);
     setIsLoadingMore(true);
     const loadMore = async () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/characters?skip=${
-            page * 100
+            page * 100 > 0 ? page * 100 : 0
           }&name=${searchText}`
         );
         setRessult(response.data.count);
@@ -59,9 +60,20 @@ const Home = () => {
     };
     loadMore();
   }, [page, searchText]);
-  return isLoading ? (
-    <Spinner />
-  ) : (
+
+  const handdlePageChange = (event) => {
+    const value = event.target.value;
+
+    if (value < 1 || typeof value === "string") {
+      setPage(0);
+    }
+    if (value > Math.floor(results / 100) + 1) {
+      setPage(Math.floor(results / 100));
+    }
+
+    setPage(event.target.value - 1);
+  };
+  return (
     <>
       <div className="search-container">
         <input
@@ -91,7 +103,15 @@ const Home = () => {
               : "fa-solid fa-arrow-left"
           }
         ></i>
-        <span>page {page + 1}</span>
+        <span>
+          <input
+            type="number"
+            value={page + 1}
+            onChange={handdlePageChange}
+            onMouseOut={handdlePageChange}
+          />
+          /{Math.floor(results / 100) + 1}
+        </span>
         <i
           className={
             page === Math.floor(results / 100)
