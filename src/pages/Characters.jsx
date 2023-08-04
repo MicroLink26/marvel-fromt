@@ -79,7 +79,10 @@ const Home = () => {
       ) : (
         <div className="characters-container">
           {characterList.map((character) => {
-            const imageUrl = `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`;
+            const imageUrl = `${character.thumbnail.path.replace(
+              "http",
+              "https"
+            )}/portrait_uncanny.${character.thumbnail.extension}`;
             return (
               <Link
                 to={`/characterdetail/${character._id}`}

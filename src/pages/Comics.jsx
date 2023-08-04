@@ -77,7 +77,10 @@ const Comics = () => {
       ) : (
         <div className="comics-container">
           {comicsList.map((comic) => {
-            const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+            const imageUrl = `${comic.thumbnail.path.replace(
+              "http",
+              "https"
+            )}/portrait_uncanny.${comic.thumbnail.extension}`;
             return (
               <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
                 <div>

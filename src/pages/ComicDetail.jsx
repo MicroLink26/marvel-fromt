@@ -84,7 +84,13 @@ const ComicDetail = () => {
       </h2>
       <div className="encart">
         <p>{comic.description.replaceAll("&#39;", "'")}</p>
-        <img src={comic.thumbnail.path + "." + comic.thumbnail.extension} />
+        <img
+          src={
+            comic.thumbnail.path.replace("http", "https") +
+            "." +
+            comic.thumbnail.extension
+          }
+        />
       </div>
     </div>
   );

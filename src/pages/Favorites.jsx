@@ -53,7 +53,10 @@ const Favorites = () => {
       <h2>Characters</h2>
       <div className="characters-container">
         {characterList.map((character) => {
-          const imageUrl = `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}`;
+          const imageUrl = `${character.thumbnail.path.replace(
+            "http",
+            "https"
+          )}/portrait_uncanny.${character.thumbnail.extension}`;
           return (
             <Link to={`/characterdetail/${character._id}`} key={character._id}>
               <div>
@@ -90,7 +93,10 @@ const Favorites = () => {
           </>
         ) : (
           comicList.map((comic) => {
-            const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+            const imageUrl = `${comic.thumbnail.path.replace(
+              "http",
+              "https"
+            )}/portrait_uncanny.${comic.thumbnail.extension}`;
             return (
               <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
                 <div>

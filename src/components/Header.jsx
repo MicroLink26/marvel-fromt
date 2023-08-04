@@ -1,7 +1,8 @@
 import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const Header = ({ userToken, setUserToken }) => {
+  const navigate = useNavigate();
   const handleDisconnect = () => {
     Cookies.remove("token");
     setUserToken("");

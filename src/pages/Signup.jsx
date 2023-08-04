@@ -35,8 +35,26 @@ export default function Signup({ setUserToken }) {
         Cookies.set("token", data.token);
         // Changer la valeur du state
         setUserToken(data.token);
+
+        try {
+          await axios.post(
+            import.meta.env.VITE_API_URL + "/user/favorites",
+            {
+              characters: localStorage.getItem("favoritesCharacters"),
+              comics: localStorage.getItem("favoritesComics"),
+            },
+
+            {
+              headers: {
+                Authorization: "Bearer " + data.token,
+              },
+            }
+          );
+          navigate("/");
+        } catch (error) {
+          console.log("favorites>>>", error);
+        }
         // Naviguer vers la page d'accueil
-        navigate("/");
       } catch (error) {
         console.log("catch>>>", error);
         setErrorMessage("Désolé, une erreur est survenue !");

@@ -97,7 +97,11 @@ const CharacterDetail = () => {
       <div className="encart">
         <p>{character.description.replaceAll("&#39;", "'")}</p>
         <img
-          src={character.thumbnail.path + "." + character.thumbnail.extension}
+          src={
+            character.thumbnail.path.replace("http", "https") +
+            "." +
+            character.thumbnail.extension
+          }
         />
       </div>
       <h2>Comics où apparait {character.name}</h2>
@@ -125,7 +129,10 @@ const CharacterDetail = () => {
           </>
         ) : (
           comicsList.map((comic) => {
-            const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+            const imageUrl = `${comic.thumbnail.path.replace(
+              "http",
+              "https"
+            )}/portrait_uncanny.${comic.thumbnail.extension}`;
             return (
               <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
                 <div>
