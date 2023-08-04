@@ -67,14 +67,14 @@
 }
 .pagination span {
   padding: 0 10px;
-  font-size: 25px;
-  line-height: 50px;
+  font-size: 32px;
+  /* line-height: 45px; */
 }
 .pagination input {
-  font-size: 25px;
-  line-height: 50px;
+  font-size: 32px;
+
   border: none;
-  width: 32px;
+  width: 40px;
   font-family: "Open Sans", sans-serif;
 }
 /* Chrome, Safari, Edge, Opera */

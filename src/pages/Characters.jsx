@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "../styles/home.css";
-
+import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Spinner";
+import Pagination from "../components/Pagination";
 
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
@@ -13,23 +14,6 @@ const Home = () => {
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchText, setSearchText] = useState("");
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         import.meta.env.VITE_API_URL + "/characters"
-  //       );
-  //       //console.log(response.data.results);
-  //       setCharacterList(response.data.results);
-  //       setRessult(response.data.count);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.log("catch home>>>", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const findInStorage = (id) => {
     const favoritesCharacters =
@@ -61,7 +45,7 @@ const Home = () => {
     loadMore();
   }, [page, searchText]);
 
-  const handdlePageChange = (event) => {
+  const handlePageChange = (event) => {
     const value = event.target.value;
 
     if (value < 1 || typeof value === "string") {
@@ -75,55 +59,21 @@ const Home = () => {
   };
   return (
     <>
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Recherche des personnages"
-          value={searchText}
-          onChange={(event) => {
-            setSearchText(event.target.value);
-            setPage(0);
-          }}
-        ></input>
-        <i className="fa-solid fa-search search-input-icon"></i>
-      </div>
+      <SearchBar
+        setPage={setPage}
+        setSearchText={setSearchText}
+        searchText={searchText}
+      />
+
       <div>
-        {" "}
         {results} personnage{results > 1 && "s"} trouvé{results > 1 && "s"}
       </div>
-      <div className="pagination">
-        <i
-          onClick={() => {
-            setPage(page - 1);
-          }}
-          className={
-            page === 0
-              ? "hidden fa-solid fa-arrow-left"
-              : "fa-solid fa-arrow-left"
-          }
-        ></i>
-        <span>
-          <input
-            type="number"
-            value={page + 1}
-            onChange={handdlePageChange}
-            onMouseOut={handdlePageChange}
-          />
-          /{Math.floor(results / 100) + 1}
-        </span>
-        <i
-          className={
-            page === Math.floor(results / 100)
-              ? "hidden fa-solid fa-arrow-left"
-              : "fa-solid fa-arrow-right"
-          }
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        ></i>
-      </div>
-
+      <Pagination
+        page={page}
+        setPage={setPage}
+        handlePageChange={handlePageChange}
+        results={results}
+      />
       {isLoadingMore ? (
         <Spinner />
       ) : (
@@ -137,10 +87,9 @@ const Home = () => {
               >
                 <div>
                   <p>
-                    <FontAwesomeIcon
-                      icon="star"
-                      className={findInStorage(character._id) ? "favorite" : ""}
-                    />{" "}
+                    {findInStorage(character._id) && (
+                      <FontAwesomeIcon icon="star" className="favorite" />
+                    )}
                     {character.name}
                   </p>
 
@@ -150,6 +99,10 @@ const Home = () => {
             );
           })}
         </div>
+      )}
+
+      {results === 0 && (
+        <span>Pas de résultats correspondants à la recherche</span>
       )}
     </>
   );

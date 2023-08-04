@@ -96,8 +96,9 @@ const CharacterDetail = () => {
       <h2>
         <FontAwesomeIcon
           icon="star"
-          className={isFavorite ? "favorite" : ""}
+          className={isFavorite ? "favorite mouse-hover" : "mouse-hover"}
           onClick={addToStorage}
+          title={isFavorite ? "Supprimer des favoris" : "Ajouter aux favoris"}
         />
         {character.name}
       </h2>

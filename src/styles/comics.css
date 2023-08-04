@@ -32,3 +32,7 @@
   font-size: 20px;
   margin-bottom: 10px;
 }
+
+.lot-of-results input {
+  width: 60px;
+}

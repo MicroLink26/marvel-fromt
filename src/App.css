@@ -112,3 +112,7 @@ button {
 .loading-more {
   margin-top: 226px;
 }
+
+.mouse-hover:hover {
+  cursor: pointer;
+}
