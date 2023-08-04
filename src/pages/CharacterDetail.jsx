@@ -35,7 +35,7 @@ const CharacterDetail = () => {
           setComicsList(data);
           setIsLoadingComics(false);
         } catch (error) {
-          console.log("catch movies>>", error);
+          console.log("catch comicsS>>", error);
         }
 
         //console.log(response.data);
@@ -107,7 +107,7 @@ const CharacterDetail = () => {
           src={character.thumbnail.path + "." + character.thumbnail.extension}
         />
       </div>
-      <h2>Comics</h2>
+      <h2>Comics où apparait {character.name}</h2>
       <div className="comics-container">
         {isLoadingComics ? (
           <>

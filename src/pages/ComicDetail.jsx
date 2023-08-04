@@ -21,9 +21,8 @@ const ComicDetail = () => {
 
         setComic(response.data);
         setIsLoading(false);
-        //console.log(response.data);
       } catch (error) {
-        console.log("catch home>>>", error);
+        console.log("catch comic>>>", error);
       }
     };
 
@@ -82,8 +81,10 @@ const ComicDetail = () => {
         />
         {comic.title}
       </h2>
-      <p>{comic.description}</p>
-      <img src={comic.thumbnail.path + "." + comic.thumbnail.extension} />
+      <div className="encart">
+        <p>{comic.description}</p>
+        <img src={comic.thumbnail.path + "." + comic.thumbnail.extension} />
+      </div>
     </div>
   );
 };

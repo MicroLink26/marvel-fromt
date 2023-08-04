@@ -10,6 +10,8 @@ const Favorites = () => {
   const [characterList, setCharacterList] = useState([]);
   const [comicList, setComicList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingComics, setIsLoadingComics] = useState(true);
+
   useEffect(() => {
     console.log(import.meta.env.VITE_API_URL);
     const fetchData = async () => {
@@ -21,7 +23,7 @@ const Favorites = () => {
               JSON.parse(localStorage.getItem("favoritesCharacters")) || [],
           }
         );
-        console.log(response.data);
+        //console.log(response.data);
         setCharacterList(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -34,9 +36,9 @@ const Favorites = () => {
             comics: JSON.parse(localStorage.getItem("favoritesComics")) || [],
           }
         );
-        console.log(response.data);
+        //console.log(response.data);
         setComicList(response.data);
-        setIsLoading(false);
+        setIsLoadingComics(false);
       } catch (error) {
         console.log("catch home>>>", error);
       }
@@ -65,18 +67,41 @@ const Favorites = () => {
       </div>
       <h2>Comics</h2>
       <div className="comics-container">
-        {comicList.map((comic) => {
-          const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
-          return (
-            <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
+        {isLoadingComics ? (
+          <>
+            <a>
               <div>
-                <p>{comic.title}</p>
-
-                <img src={imageUrl} />
+                <p> </p>
+                <img></img>
               </div>
-            </Link>
-          );
-        })}
+            </a>
+            <a>
+              <div>
+                <p></p>
+                <img></img>
+              </div>
+            </a>
+            <a>
+              <div>
+                <p> </p>
+                <img></img>
+              </div>
+            </a>
+          </>
+        ) : (
+          comicList.map((comic) => {
+            const imageUrl = `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`;
+            return (
+              <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
+                <div>
+                  <p>{comic.title}</p>
+
+                  <img src={imageUrl} />
+                </div>
+              </Link>
+            );
+          })
+        )}
       </div>
     </>
   );

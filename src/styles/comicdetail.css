@@ -2,3 +2,11 @@
   width: 400px;
   object-fit: contain;
 }
+.comicDetail .encart {
+  display: flex;
+  gap: 10px;
+}
+.comicDetail .encart p {
+  font-size: 20px;
+  text-align: justify;
+}
