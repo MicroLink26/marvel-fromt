@@ -76,13 +76,14 @@ const ComicDetail = () => {
       <h2>
         <FontAwesomeIcon
           icon="star"
-          className={isFavorite ? "favorite" : ""}
+          className={isFavorite ? "favorite mouse-hover" : "mouse-hover"}
           onClick={addToStorage}
+          title={isFavorite ? "Supprimer des favoris" : "Ajouter aux favoris"}
         />
         {comic.title}
       </h2>
       <div className="encart">
-        <p>{comic.description}</p>
+        <p>{comic.description.replaceAll("&#39;", "'")}</p>
         <img src={comic.thumbnail.path + "." + comic.thumbnail.extension} />
       </div>
     </div>

@@ -15,7 +15,6 @@ const CharacterDetail = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    //console.log(import.meta.env.VITE_API_URL);
     const fetchData = async () => {
       try {
         const response = await axios.get(
@@ -23,7 +22,7 @@ const CharacterDetail = () => {
         );
 
         setCharacter(response.data);
-        console.log(response.data.comics);
+
         setIsLoading(false);
         //load comics
         try {
@@ -31,7 +30,7 @@ const CharacterDetail = () => {
             import.meta.env.VITE_API_URL + "/comics/",
             { comics: response.data.comics }
           );
-          console.log(data);
+
           setComicsList(data);
           setIsLoadingComics(false);
         } catch (error) {
@@ -48,31 +47,26 @@ const CharacterDetail = () => {
   }, []);
 
   const addToStorage = () => {
-    //console.log(localStorage.getItem("favoritesCharacters"));
-    //check if id is in favoritesCharacters
     let favoritesCharacters =
       JSON.parse(localStorage.getItem("favoritesCharacters")) || [];
 
-    //console.log(favoritesCharacters);
     const favoriteIndex = favoritesCharacters.findIndex((element) => {
       return element === id;
     });
-    //console.log(favoriteIndex);
+
     if (favoriteIndex === -1) {
       favoritesCharacters.push(id);
-      //console.log(favoritesCharacters);
+
       setIsFavorite(true);
     } else {
       favoritesCharacters.splice(favoriteIndex, 1);
       setIsFavorite(false);
     }
-    //console.log(favoritesCharacters);
+
     localStorage.setItem(
       "favoritesCharacters",
       JSON.stringify(favoritesCharacters)
     );
-    //localStorage.setItem("favoritesCharacters", favoritesCharacters);
-    //console.log(localStorage.getItem("favoritesCharacters"));
   };
 
   const findInStorage = () => {
@@ -82,8 +76,6 @@ const CharacterDetail = () => {
       return element === id;
     });
 
-    // console.log(favoriteIndex, id);
-    // console.log(favoritesCharacters);
     return favoriteIndex === -1 ? false : true;
   };
 
@@ -103,7 +95,7 @@ const CharacterDetail = () => {
         {character.name}
       </h2>
       <div className="encart">
-        <p>{character.description}</p>
+        <p>{character.description.replaceAll("&#39;", "'")}</p>
         <img
           src={character.thumbnail.path + "." + character.thumbnail.extension}
         />
