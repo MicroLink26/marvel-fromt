@@ -7,6 +7,7 @@ const Header = ({ userToken, setUserToken }) => {
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
   const handleDisconnect = () => {
+    setOpenMenu(false);
     Cookies.remove("token");
     setUserToken("");
     localStorage.setItem("favoritesCharacters", JSON.stringify([]));
@@ -65,13 +66,19 @@ const Header = ({ userToken, setUserToken }) => {
             </div>
             <ul>
               <li>
-                <Link to="/">Personnages</Link>
+                <Link to="/" onClick={() => setOpenMenu(false)}>
+                  Personnages
+                </Link>
               </li>
               <li>
-                <Link to="/comics">Comics</Link>
+                <Link to="/comics" onClick={() => setOpenMenu(false)}>
+                  Comics
+                </Link>
               </li>
               <li>
-                <Link to="/favorites">Mes coups de c&oelig;urs</Link>
+                <Link to="/favorites" onClick={() => setOpenMenu(false)}>
+                  Mes coups de c&oelig;urs
+                </Link>
               </li>
               {userToken ? (
                 <>
@@ -84,10 +91,14 @@ const Header = ({ userToken, setUserToken }) => {
               ) : (
                 <>
                   <li>
-                    <Link to="/login">Se connecter</Link>
+                    <Link to="/login" onClick={() => setOpenMenu(false)}>
+                      Se connecter
+                    </Link>
                   </li>
                   <li>
-                    <Link to="/signup">S'inscrire</Link>
+                    <Link to="/signup" onClick={() => setOpenMenu(false)}>
+                      S'inscrire
+                    </Link>
                   </li>
                 </>
               )}
