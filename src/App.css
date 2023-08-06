@@ -121,7 +121,7 @@ button {
   display: none;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
   .container {
     width: 100%;
   }
