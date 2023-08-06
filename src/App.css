@@ -150,11 +150,11 @@ button {
   .mobile-menu .menu > ul {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     padding-top: 20px;
   }
   .mobile-menu .menu > ul > li {
-    font-size: 10px;
+    font-size: 16px;
   }
   .close {
     position: fixed;
