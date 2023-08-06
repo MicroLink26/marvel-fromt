@@ -9,8 +9,10 @@ import {
   faSearch,
   faArrowLeft,
   faArrowRight,
+  faBars,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faStar, faSearch, faArrowLeft, faArrowRight);
+library.add(faStar, faSearch, faArrowLeft, faArrowRight, faBars, faXmark);
 import api from "./services/api";
 import Home from "./pages/Characters";
 import Header from "./components/Header";
@@ -39,7 +41,6 @@ function App() {
         );
       }
     };
-
     setFavorites();
   }, []);
 

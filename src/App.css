@@ -116,3 +116,49 @@ button {
 .mouse-hover:hover {
   cursor: pointer;
 }
+
+.mobile-menu {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .container {
+    width: 100%;
+  }
+  header > ul {
+    display: none;
+  }
+  .characterDetail .encart {
+    flex-direction: column;
+  }
+  .characterDetail img {
+    max-width: 300px;
+    margin: auto auto;
+  }
+  .mobile-menu {
+    display: block;
+    font-size: 26px;
+    padding: 5px;
+  }
+  .mobile-menu .menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: gray;
+    padding: 5px;
+  }
+  .mobile-menu .menu > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 20px;
+  }
+  .mobile-menu .menu > ul > li {
+    font-size: 10px;
+  }
+  .close {
+    position: fixed;
+    top: 0;
+    right: 4px;
+  }
+}

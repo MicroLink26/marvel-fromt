@@ -73,7 +73,7 @@ const Favorites = () => {
           Reset favorites
         </button>
       ) : (
-        <p>Au favori</p>
+        <p>Aucun favori</p>
       )}
       {hasFavoritesCharacters && (
         <>
