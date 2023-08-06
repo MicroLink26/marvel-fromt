@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import api from "../services/api";
 import "../styles/signup.css";
 export default function Signup({ setUserToken }) {
   const [username, setUsername] = useState("");
@@ -37,19 +38,20 @@ export default function Signup({ setUserToken }) {
         setUserToken(data.token);
 
         try {
-          await axios.post(
-            import.meta.env.VITE_API_URL + "/user/favorites",
-            {
-              characters: localStorage.getItem("favoritesCharacters"),
-              comics: localStorage.getItem("favoritesComics"),
-            },
+          // await axios.post(
+          //   import.meta.env.VITE_API_URL + "/user/favorites",
+          //   {
+          //     characters: localStorage.getItem("favoritesCharacters"),
+          //     comics: localStorage.getItem("favoritesComics"),
+          //   },
 
-            {
-              headers: {
-                Authorization: "Bearer " + data.token,
-              },
-            }
-          );
+          //   {
+          //     headers: {
+          //       Authorization: "Bearer " + data.token,
+          //     },
+          //   }
+          // );
+          await api.updateFavorites();
           navigate("/");
         } catch (error) {
           console.log("favorites>>>", error);

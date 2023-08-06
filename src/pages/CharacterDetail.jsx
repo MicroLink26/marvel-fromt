@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import api from "../services/api";
 import "../styles/characterdetail.css";
 
 import Spinner from "../components/Spinner";
@@ -46,7 +47,7 @@ const CharacterDetail = () => {
     fetchData();
   }, []);
 
-  const addToStorage = () => {
+  const addToStorage = async () => {
     let favoritesCharacters =
       JSON.parse(localStorage.getItem("favoritesCharacters")) || [];
 
@@ -67,6 +68,7 @@ const CharacterDetail = () => {
       "favoritesCharacters",
       JSON.stringify(favoritesCharacters)
     );
+    await api.updateFavorites();
   };
 
   const findInStorage = () => {

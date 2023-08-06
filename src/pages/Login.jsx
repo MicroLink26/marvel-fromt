@@ -3,6 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import "../styles/login.css";
+import api from "../services/api";
 
 import Spinner from "../components/Spinner";
 
@@ -14,6 +15,20 @@ export default function Login({ setUserToken }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const setFavorites = async () => {
+    if (Cookies.get("token")) {
+      const favorites = await api.fetchfavorites();
+
+      localStorage.setItem(
+        "favoritesCharacters",
+        JSON.stringify(favorites.data.characters)
+      );
+      localStorage.setItem(
+        "favoritesComics",
+        JSON.stringify(favorites.data.comics)
+      );
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     setProcessing(true);
@@ -34,6 +49,7 @@ export default function Login({ setUserToken }) {
         // changer la valeur du state
         setUserToken(data.token);
         setProcessing(false);
+        setFavorites();
         //si redirigé d'une autre page
         if (location.state) {
           navigate(location.state.from, {

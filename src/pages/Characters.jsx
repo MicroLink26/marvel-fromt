@@ -6,6 +6,8 @@ import "../styles/home.css";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Spinner";
 import Pagination from "../components/Pagination";
+import api from "../services/api";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
@@ -44,7 +46,24 @@ const Home = () => {
     };
     loadMore();
   }, [page, searchText]);
+  useEffect(() => {
+    const setFavorites = async () => {
+      if (Cookies.get("token")) {
+        const favorites = await api.fetchfavorites();
 
+        localStorage.setItem(
+          "favoritesCharacters",
+          JSON.stringify(favorites.data.characters)
+        );
+        localStorage.setItem(
+          "favoritesComics",
+          JSON.stringify(favorites.data.comics)
+        );
+      }
+    };
+
+    setFavorites();
+  }, []);
   const handlePageChange = (event) => {
     const value = event.target.value;
 

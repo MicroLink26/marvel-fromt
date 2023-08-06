@@ -2,11 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import "../styles/comics.css";
 import SearchBar from "../components/SearchBar";
 import Spinner from "../components/Spinner";
 import Pagination from "../components/Pagination";
+import api from "../services/api";
+import Cookies from "js-cookie";
 
 const Comics = () => {
   const [comicsList, setComicsList] = useState([]);
@@ -44,6 +45,24 @@ const Comics = () => {
     };
     loadMore();
   }, [page, searchText]);
+  useEffect(() => {
+    const setFavorites = async () => {
+      if (Cookies.get("token")) {
+        const favorites = await api.fetchfavorites();
+
+        localStorage.setItem(
+          "favoritesCharacters",
+          JSON.stringify(favorites.data.characters)
+        );
+        localStorage.setItem(
+          "favoritesComics",
+          JSON.stringify(favorites.data.comics)
+        );
+      }
+    };
+
+    setFavorites();
+  }, []);
   const handlePageChange = (event) => {
     const value = event.target.value;
 

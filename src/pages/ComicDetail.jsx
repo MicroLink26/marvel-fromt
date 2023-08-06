@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import api from "../services/api";
 import "../styles/comicdetail.css";
 
 import Spinner from "../components/Spinner";
@@ -29,7 +30,7 @@ const ComicDetail = () => {
     fetchData();
   }, []);
 
-  const addToStorage = () => {
+  const addToStorage = async () => {
     //console.log(localStorage.getItem("favoritesComics"));
     //check if id is in favoritesComics
     let favoritesComics =
@@ -52,6 +53,7 @@ const ComicDetail = () => {
     localStorage.setItem("favoritesComics", JSON.stringify(favoritesComics));
     //localStorage.setItem("favoritesComics", favoritesComics);
     //console.log(localStorage.getItem("favoritesComics"));
+    await api.updateFavorites();
   };
 
   const findInStorage = () => {

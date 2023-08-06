@@ -8,7 +8,7 @@ header {
   justify-content: space-between;
 }
 
-header > img {
+header > a > img {
   width: 200px;
   object-fit: contain;
 }

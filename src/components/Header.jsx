@@ -6,11 +6,16 @@ const Header = ({ userToken, setUserToken }) => {
   const handleDisconnect = () => {
     Cookies.remove("token");
     setUserToken("");
+    localStorage.setItem("favoritesCharacters", JSON.stringify([]));
+    localStorage.setItem("favoritesComics", JSON.stringify([]));
+
     navigate("/");
   };
   return (
     <header className="container">
-      <img src={logo} />
+      <Link to="/">
+        <img src={logo} />
+      </Link>
       <ul>
         <li>
           <Link to="/">Personnages</Link>
@@ -24,10 +29,9 @@ const Header = ({ userToken, setUserToken }) => {
         {userToken ? (
           <>
             <li>
-              <a>Mon profil</a>
-            </li>
-            <li>
-              <a onClick={handleDisconnect}>Se déconnecter</a>
+              <a href="#" onClick={handleDisconnect}>
+                Se déconnecter
+              </a>
             </li>
           </>
         ) : (
