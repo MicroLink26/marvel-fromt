@@ -149,6 +149,7 @@ button {
     background-color: gray;
     padding: 5px;
     animation: blur 1s;
+    z-index: 100;
   }
   @keyframes blur {
     from {
