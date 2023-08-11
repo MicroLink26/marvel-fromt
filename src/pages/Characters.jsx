@@ -82,6 +82,7 @@ const Home = () => {
         setPage={setPage}
         setSearchText={setSearchText}
         searchText={searchText}
+        searchPlaceHolder="Rechercher un personnage"
       />
 
       <div>

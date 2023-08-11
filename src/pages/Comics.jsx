@@ -81,6 +81,7 @@ const Comics = () => {
         setPage={setPage}
         setSearchText={setSearchText}
         searchText={searchText}
+        searchPlaceHolder="Rechercher un comic"
       />
       <div>
         {results} comic{results > 1 && "s"} trouvé{results > 1 && "s"}
