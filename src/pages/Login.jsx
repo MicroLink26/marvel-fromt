@@ -58,11 +58,12 @@ export default function Login({ setUserToken }) {
         } else navigate("/");
         // sinon naviguer vers la page d'accueil
       } catch (error) {
+        setProcessing(false);
         if (error.code === "ERR_BAD_REQUEST")
           setErrorMessage(
             "Le mot de passe ne correspont pas avec l'adresse mail"
           );
-        else setErrorMessage("Erreur du server, veuillez réessaye rplus tard!"); //à priori un pb d'infra
+        else setErrorMessage("Erreur du server, veuillez réessaye plus tard!"); //à priori un pb d'infra
       }
     }
   };
