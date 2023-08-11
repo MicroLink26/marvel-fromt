@@ -110,10 +110,10 @@ const Home = () => {
               >
                 <div>
                   <p>
+                    {character.name}{" "}
                     {findInStorage(character._id) && (
-                      <FontAwesomeIcon icon="star" className="favorite" />
+                      <FontAwesomeIcon icon="heart" className="favorite" />
                     )}
-                    {character.name}
                   </p>
 
                   <img src={imageUrl} />

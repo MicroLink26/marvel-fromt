@@ -76,13 +76,13 @@ const ComicDetail = () => {
   ) : (
     <div className="comicDetail">
       <h2>
+        {comic.title}{" "}
         <FontAwesomeIcon
-          icon="star"
+          icon="heart"
           className={isFavorite ? "favorite mouse-hover" : "mouse-hover"}
           onClick={addToStorage}
           title={isFavorite ? "Supprimer des favoris" : "Ajouter aux favoris"}
         />
-        {comic.title}
       </h2>
       <div className="encart">
         <p>{comic.description.replaceAll("&#39;", "'")}</p>

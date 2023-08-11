@@ -105,11 +105,10 @@ const Comics = () => {
               <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
                 <div>
                   <p>
+                    {comic.title}{" "}
                     {findInStorage(comic._id) && (
-                      <FontAwesomeIcon icon="star" className="favorite" />
+                      <FontAwesomeIcon icon="heart" className="favorite" />
                     )}
-
-                    {comic.title}
                   </p>
 
                   <img src={imageUrl} />

@@ -11,8 +11,17 @@ import {
   faArrowRight,
   faBars,
   faXmark,
+  faHeart,
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faStar, faSearch, faArrowLeft, faArrowRight, faBars, faXmark);
+library.add(
+  faStar,
+  faSearch,
+  faArrowLeft,
+  faArrowRight,
+  faBars,
+  faXmark,
+  faHeart
+);
 import api from "./services/api";
 import Home from "./pages/Characters";
 import Header from "./components/Header";
