@@ -74,7 +74,7 @@ const ComicDetail = () => {
   return isLoading ? (
     <Spinner />
   ) : (
-    <div className="comicDetail">
+    <div className="comicDetail  fade-in">
       <h2>
         {comic.title}{" "}
         <FontAwesomeIcon

@@ -86,7 +86,7 @@ const CharacterDetail = () => {
   return isLoading ? (
     <Spinner />
   ) : (
-    <div className="characterDetail">
+    <div className="characterDetail  fade-in">
       <h2>
         {character.name}{" "}
         <FontAwesomeIcon
@@ -106,47 +106,52 @@ const CharacterDetail = () => {
           }
         />
       </div>
-      <h2>Comics où apparait {character.name}</h2>
-      <div className="comics-container">
-        {isLoadingComics ? (
-          <>
-            <a>
-              <div>
-                <p> </p>
-                <img></img>
-              </div>
-            </a>
-            <a>
-              <div>
-                <p></p>
-                <img></img>
-              </div>
-            </a>
-            <a>
-              <div>
-                <p> </p>
-                <img></img>
-              </div>
-            </a>
-          </>
-        ) : (
-          comicsList.map((comic) => {
-            const imageUrl = `${comic.thumbnail.path.replace(
-              "http",
-              "https"
-            )}/portrait_uncanny.${comic.thumbnail.extension}`;
-            return (
-              <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
-                <div>
-                  <p>{comic.title}</p>
 
-                  <img src={imageUrl} />
-                </div>
-              </Link>
-            );
-          })
-        )}
-      </div>
+      {comicsList.length > 0 && (
+        <>
+          <h2>Comics où apparait {character.name}</h2>
+          <div className="comics-container">
+            {isLoadingComics ? (
+              <>
+                <a>
+                  <div>
+                    <p> </p>
+                    <img></img>
+                  </div>
+                </a>
+                <a>
+                  <div>
+                    <p></p>
+                    <img></img>
+                  </div>
+                </a>
+                <a>
+                  <div>
+                    <p> </p>
+                    <img></img>
+                  </div>
+                </a>
+              </>
+            ) : (
+              comicsList.map((comic) => {
+                const imageUrl = `${comic.thumbnail.path.replace(
+                  "http",
+                  "https"
+                )}/portrait_uncanny.${comic.thumbnail.extension}`;
+                return (
+                  <Link to={`/comicdetail/${comic._id}`} key={comic._id}>
+                    <div>
+                      <p>{comic.title}</p>
+
+                      <img src={imageUrl} />
+                    </div>
+                  </Link>
+                );
+              })
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };

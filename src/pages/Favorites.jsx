@@ -78,7 +78,7 @@ const Favorites = () => {
       {hasFavoritesCharacters && (
         <>
           <h2>Characters</h2>
-          <div className="characters-container">
+          <div className="characters-container  fade-in">
             {characterList.map((character) => {
               const imageUrl = `${character.thumbnail.path.replace(
                 "http",

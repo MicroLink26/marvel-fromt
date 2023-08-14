@@ -95,7 +95,7 @@ const Comics = () => {
       {isLoadingMore ? (
         <Spinner />
       ) : (
-        <div className="comics-container">
+        <div className="comics-container  fade-in">
           {comicsList.map((comic) => {
             const imageUrl = `${comic.thumbnail.path.replace(
               "http",
