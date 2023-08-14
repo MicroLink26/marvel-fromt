@@ -195,3 +195,13 @@ h2 {
     opacity: 1;
   }
 }
+
+.backward-icon {
+  padding-right: 20px;
+}
+.forward-icon {
+  padding-left: 20px;
+}
+.pagination {
+  padding: 5px;
+}

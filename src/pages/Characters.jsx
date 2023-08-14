@@ -12,10 +12,11 @@ import Cookies from "js-cookie";
 const Home = () => {
   const [characterList, setCharacterList] = useState([]);
   //const [isLoading, setIsLoading] = useState(true);
-  const [results, setRessult] = useState(0);
+  const [results, setResult] = useState(0);
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [pageSize, setPageSize] = useState(100);
 
   const findInStorage = (id) => {
     const favoritesCharacters =
@@ -34,10 +35,11 @@ const Home = () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/characters?skip=${
-            page * 100 > 0 ? page * 100 : 0
-          }&name=${searchText}`
+            page * pageSize > 0 ? page * pageSize : 0
+          }&name=${searchText}&limit=${pageSize}`
         );
-        setRessult(response.data.count);
+        setResult(response.data.count);
+
         setCharacterList(response.data.results);
         setIsLoadingMore(false);
       } catch (error) {
@@ -46,6 +48,28 @@ const Home = () => {
     };
     loadMore();
   }, [page, searchText]);
+
+  useEffect(() => {
+    setPage(0);
+    setIsLoadingMore(true);
+    const loadMore = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/characters?skip=${
+            page * pageSize > 0 ? page * pageSize : 0
+          }&name=${searchText}&limit=${pageSize}`
+        );
+        setResult(response.data.count);
+
+        setCharacterList(response.data.results);
+        setIsLoadingMore(false);
+      } catch (error) {
+        console.log("catch home>>>", error);
+      }
+    };
+    loadMore();
+  }, [pageSize]);
+
   useEffect(() => {
     const setFavorites = async () => {
       if (Cookies.get("token")) {
@@ -65,16 +89,19 @@ const Home = () => {
     setFavorites();
   }, []);
   const handlePageChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value ?? 0;
+
+    console.log(value);
 
     if (value < 1 || typeof value === "string") {
       setPage(0);
+      console.log("string");
+    } else if (value > Math.floor(results / pageSize) + 1) {
+      setPage(Math.floor(results / pageSize));
+      console.log("page :", page);
+    } else {
+      setPage(event.target.value - 1);
     }
-    if (value > Math.floor(results / 100) + 1) {
-      setPage(Math.floor(results / 100));
-    }
-
-    setPage(event.target.value - 1);
   };
   return (
     <>
@@ -93,6 +120,9 @@ const Home = () => {
         setPage={setPage}
         handlePageChange={handlePageChange}
         results={results}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        name="Characters"
       />
       {isLoadingMore ? (
         <Spinner />

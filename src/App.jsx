@@ -12,6 +12,8 @@ import {
   faBars,
   faXmark,
   faHeart,
+  faBackwardFast,
+  faForwardFast,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -20,7 +22,9 @@ library.add(
   faArrowRight,
   faBars,
   faXmark,
-  faHeart
+  faHeart,
+  faBackwardFast,
+  faForwardFast
 );
 import api from "./services/api";
 import Home from "./pages/Characters";

@@ -15,7 +15,7 @@ const Comics = () => {
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [searchText, setSearchText] = useState("");
-
+  const [pageSize, setPageSize] = useState(100);
   const findInStorage = (id) => {
     const favoritesComics =
       JSON.parse(localStorage.getItem("favoritesComics")) || [];
@@ -33,8 +33,8 @@ const Comics = () => {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}/comics?skip=${
-            page * 100 > 0 ? page * 100 : 0
-          }&title=${searchText}`
+            page * pageSize > 0 ? page * pageSize : 0
+          }&title=${searchText}&limit=${pageSize}`
         );
         setRessult(response.data.count);
         setComicsList(response.data.results);
@@ -44,7 +44,7 @@ const Comics = () => {
       }
     };
     loadMore();
-  }, [page, searchText]);
+  }, [page, searchText, pageSize]);
   useEffect(() => {
     const setFavorites = async () => {
       if (Cookies.get("token")) {
@@ -91,6 +91,9 @@ const Comics = () => {
         setPage={setPage}
         handlePageChange={handlePageChange}
         results={results}
+        pageSize={pageSize}
+        setPageSize={setPageSize}
+        name="Comics"
       />
       {isLoadingMore ? (
         <Spinner />
