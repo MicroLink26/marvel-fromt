@@ -58,8 +58,9 @@ export default function Signup({ setUserToken }) {
         }
         // Naviguer vers la page d'accueil
       } catch (error) {
-        console.log("catch>>>", error);
-        setErrorMessage("Désolé, une erreur est survenue !");
+        if (error.code === "ERR_BAD_REQUEST")
+          setErrorMessage("Le compte existe déjà !");
+        else setErrorMessage("Désolé, une erreur est survenue !");
       }
     }
   };
