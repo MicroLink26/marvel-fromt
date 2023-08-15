@@ -31,13 +31,11 @@ const Pagination = ({
         ></FontAwesomeIcon>
 
         <span>
-          {page + 1}/{Math.floor(results / pageSize)}
+          {page + 1}/{~~(results / pageSize)}
         </span>
         <FontAwesomeIcon
           icon="fa-solid fa-arrow-right"
-          className={
-            page === Math.floor(results / pageSize) - 1 ? "hidden" : ""
-          }
+          className={page === ~~(results / pageSize) - 1 ? "hidden" : ""}
           onClick={() => {
             setPage(page + 1);
           }}
@@ -47,12 +45,12 @@ const Pagination = ({
         <FontAwesomeIcon
           icon="fa-solid fa-forward-fast"
           className={
-            page === Math.floor(results / pageSize) - 1
+            page === ~~(results / pageSize) - 1
               ? "hidden forward-icon"
               : "forward-icon"
           }
           onClick={() => {
-            setPage(Math.floor(results / pageSize) - 1);
+            setPage(~~(results / pageSize) - 1);
           }}
           size="2x"
         ></FontAwesomeIcon>
