@@ -28,44 +28,40 @@ Just a marvel technical test for le Reacteur
 
 <p align="center">
 <img
-		width="500"
-        height="500"        
+		width="500"  
         style="object-fit: contain;"
 		alt="Capture 1"
-
     	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen1.png">
 
 <img
-		width="500"
-        height="500"        
+        width="500"
         style="object-fit: contain;"
-		alt="Capture 3"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen3.png">
-<img
-		width="500"
-        height="500"        
-        style="object-fit: contain;"
-		alt="Capture 2"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen2.png">
-<img
-		width="500"
-        height="500"        
-        style="object-fit: contain;"
-		alt="Capture 4"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen4.png">
-<img
-		width="500"
-        height="500"        
-        style="object-fit: contain;"
-		alt="Capture 5"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png">
+    	alt="Capture 3"
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen3.png">
 
 <img
-		width="500"
-        height="500"        
+        width="500"
         style="object-fit: contain;"
-		alt="Capture 6"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen6.png">
+    	alt="Capture 2"
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen2.png">
+
+<img
+        width="500"
+        style="object-fit: contain;"
+    	alt="Capture 4"
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen4.png">
+
+<img
+        width="500"
+        style="object-fit: contain;"
+    	alt="Capture 5"
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png">
+
+<img
+        width="500"
+        style="object-fit: contain;"
+    	alt="Capture 6"
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen6.png">
 
 </p>
 
