@@ -47,10 +47,7 @@ Just a marvel technical test for le Reacteur
 		width="210"
 		alt="Capture 5"
 		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png">
-<img
-		width="210"
-		alt="Capture 6"
-		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen6.png">
+
 </p>
 
 ### Running the project
