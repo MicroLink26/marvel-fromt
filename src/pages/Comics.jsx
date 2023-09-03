@@ -69,8 +69,8 @@ const Comics = () => {
     if (value < 1 || typeof value === "string") {
       setPage(0);
     }
-    if (value > ~~(results / 100) + 1) {
-      setPage(~~(results / 100));
+    if (value > Math.ceil(results / 100) + 1) {
+      setPage(Math.ceil(results / 100));
     }
 
     setPage(event.target.value - 1);

@@ -96,8 +96,8 @@ const Home = () => {
     if (value < 1 || typeof value === "string") {
       setPage(0);
       console.log("string");
-    } else if (value > ~~(results / pageSize) + 1) {
-      setPage(~~(results / pageSize));
+    } else if (value > Math.ceil(results / pageSize) + 1) {
+      setPage(Math.ceil(results / pageSize));
       console.log("page :", page);
     } else {
       setPage(event.target.value - 1);
