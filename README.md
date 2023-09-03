@@ -30,27 +30,27 @@ Just a marvel technical test for le Reacteur
 <img
 		width="210"
 		alt="Capture 1"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/signin-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen1.png">
 <img
 		width="210"
 		alt="Capture 2"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/signup-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen2.png">
 <img
 		width="210"
 		alt="Capture 3"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/home-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen3.png">
 <img
 		width="210"
 		alt="Capture 4"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/room-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen4.png">
 <img
 		width="210"
 		alt="Capture 5"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/aroundme-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png">
 <img
 		width="210"
 		alt="Capture 6"
-		src="https://github.com/MicroLink26/airbnb-mobile/blob/main/preview/profile-screen.png">
+		src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen6.png">
 </p>
 
 ### Running the project
