@@ -31,32 +31,37 @@ Just a marvel technical test for le Reacteur
 		width="500"  
         style="object-fit: contain;"
 		alt="Capture 1"
-    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen1.png"></p><p align="center">
-
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen1.png">
+        </p>
+        <p align="center">
 <img
         width="500"
         style="object-fit: contain;"
     	alt="Capture 3"
-    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen3.png"></p><p align="center">
-
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen3.png">
+        </p>
+        <p align="center">
 <img
         width="500"
         style="object-fit: contain;"
     	alt="Capture 2"
-    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen2.png"></p><p align="center">
-
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen2.png">
+        </p>
+        <p align="center">
 <img
         width="500"
         style="object-fit: contain;"
     	alt="Capture 4"
-    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen4.png"></p><p align="center">
-
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen4.png">
+        </p>
+        <p align="center">
 <img
         width="500"
         style="object-fit: contain;"
     	alt="Capture 5"
-    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png"></p><p align="center">
-
+    	src="https://github.com/MicroLink26/marvel-front/blob/main/preview/screen5.png">
+        </p>
+        <p align="center">
 <img
         width="500"
         style="object-fit: contain;"
